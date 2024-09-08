@@ -3,7 +3,7 @@
 import Image from "next/image";
 // import { MouseEventHandler } from "react";
 import { Expand, ShoppingCart } from "lucide-react";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { Product } from "@/types";
 import IconButton from "@/components/ui/icon-button";
@@ -18,10 +18,10 @@ interface ProductCard {
 const ProductCard: React.FC<ProductCard> = ({ data }) => {
   // const previewModal = usePreviewModal();
   // const cart = useCart();
-  // const router = useRouter();
-  // const handleClick = () => {
-  //   router.push(`/product/${data?.id}`);
-  // };
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/product/${data?.id}`);
+  };
 
   // const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
   //   event.stopPropagation();
@@ -37,12 +37,12 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
 
   return (
     <div
-      // onClick={handleClick}
+      onClick={handleClick}
       className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4"
     >
       <div className="aspect-square rounded-xl bg-gray-100 relative">
         <Image
-          src={data.images?.[3]?.url}
+          src={data.images?.[2]?.url}
           fill
           alt="Image"
           className="aspect-square object-cover rounded-md"
