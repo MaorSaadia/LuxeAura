@@ -7,6 +7,7 @@ import Container from "@/components/ui/container";
 
 import CartItem from "./components/cart-item";
 import Summary from "./components/summary";
+import { Suspense } from "react";
 
 const CartPage = () => {
   const cart = useCart();
@@ -36,7 +37,9 @@ const CartPage = () => {
                 ))}
               </ul>
             </div>
-            <Summary />
+            <Suspense>
+              <Summary />
+            </Suspense>
           </div>
         </div>
       </Container>
