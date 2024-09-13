@@ -9,6 +9,7 @@ import ToastProvider from "@/providers/toast-provider";
 import "./globals.css";
 import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 const font = Urbanist({ subsets: ["latin"] });
 
@@ -17,11 +18,12 @@ export const metadata: Metadata = {
   description: "LuxeAura Store",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentUser = await getCurrentUser();
   return (
     <html lang="en">
       <body className={font.className}>
@@ -29,7 +31,7 @@ export default function RootLayout({
         <ToastProvider />
         <LoginModal />
         <RegisterModal />
-        <Navbar />
+        <Navbar currentUser={currentUser} />
         {children}
         <Footer />
       </body>

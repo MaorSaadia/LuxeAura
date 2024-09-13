@@ -1,5 +1,6 @@
 "use client";
 
+import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ShoppingBag } from "lucide-react";
@@ -8,9 +9,13 @@ import useCart from "@/hooks/use-cart";
 import Button from "@/components/ui/button";
 import UserMenu from "./user-menu";
 
-const NavbarActions = () => {
-  const [isMounted, setIsMounted] = useState(false);
+interface NavbarActionsProps {
+  currentUser?: User | null;
+}
 
+const NavbarActions: React.FC<NavbarActionsProps> = ({ currentUser }) => {
+  const [isMounted, setIsMounted] = useState(false);
+  console.log("1", currentUser);
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -24,7 +29,7 @@ const NavbarActions = () => {
 
   return (
     <div className="ml-auto flex items-center gap-x-4">
-      <UserMenu />
+      <UserMenu currentUser={currentUser} />
       <Button
         onClick={() => router.push("/cart")}
         className="flex items-center rounded-full bg-black px-4 py-2"

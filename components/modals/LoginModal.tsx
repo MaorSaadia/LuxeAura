@@ -1,8 +1,10 @@
 "use client";
 
 import { useCallback, useState } from "react";
-
-import { FieldValues, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 
 import useLoginModal from "@/hooks/use-login-modal";
@@ -14,7 +16,7 @@ import Heading from "../ui/heading";
 import ModalButton from "../ui/modal-button";
 
 const LoginModal = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
@@ -30,26 +32,26 @@ const LoginModal = () => {
     },
   });
 
-  // const onSubmit: SubmitHandler<FieldValues> = (data) => {
-  //   setIsLoading(true);
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
 
-  //   signIn("credentials", {
-  //     ...data,
-  //     redirect: false,
-  //   }).then((callback) => {
-  //     setIsLoading(false);
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setIsLoading(false);
 
-  //     if (callback?.ok) {
-  //       toast.success("Logged in");
-  //       router.refresh();
-  //       loginModal.onClose();
-  //     }
+      if (callback?.ok) {
+        toast.success("Logged in");
+        router.refresh();
+        loginModal.onClose();
+      }
 
-  //     if (callback?.error) {
-  //       toast.error(callback.error);
-  //     }
-  //   });
-  // };
+      if (callback?.error) {
+        toast.error(callback.error);
+      }
+    });
+  };
 
   const onToggle = useCallback(() => {
     loginModal.onClose();
@@ -86,14 +88,14 @@ const LoginModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
       <div
         className="
       text-neutral-500 text-center mt-4 font-light"
       >
         <p>
-          First time here?
+          First time using Airbnb?
           <span
             onClick={onToggle}
             className="
@@ -117,7 +119,7 @@ const LoginModal = () => {
       title="Login"
       actionLabel="Continue"
       onClose={loginModal.onClose}
-      onSubmit={() => {}}
+      onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerContent}
     />

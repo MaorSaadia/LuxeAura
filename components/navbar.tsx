@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { User } from "@prisma/client";
 
 import getCategories from "@/actions/get-categories";
 import Container from "@/components/ui/container";
@@ -7,9 +8,12 @@ import NavbarActions from "@/components/navbar-actions";
 
 export const revalidate = 0;
 
-const Navbar = async () => {
-  const categories = await getCategories();
+interface NavbarProps {
+  currentUser?: User | null;
+}
 
+const Navbar: React.FC<NavbarProps> = async ({ currentUser }) => {
+  const categories = await getCategories();
   return (
     <div className="border-b">
       <Container>
@@ -27,7 +31,7 @@ const Navbar = async () => {
               <MainNav data={categories} />
             </div>
           </div>
-          <NavbarActions />
+          <NavbarActions currentUser={currentUser} />
         </div>
       </Container>
     </div>
