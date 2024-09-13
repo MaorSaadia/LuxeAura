@@ -1,6 +1,6 @@
 "use client";
 
-import { User } from "@prisma/client";
+import { SafeUser } from "@/app/types";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ShoppingBag } from "lucide-react";
@@ -10,12 +10,12 @@ import Button from "@/components/ui/button";
 import UserMenu from "./user-menu";
 
 interface NavbarActionsProps {
-  currentUser?: User | null;
+  currentUser?: SafeUser | null;
 }
 
 const NavbarActions: React.FC<NavbarActionsProps> = ({ currentUser }) => {
   const [isMounted, setIsMounted] = useState(false);
-  console.log("1", currentUser);
+
   useEffect(() => {
     setIsMounted(true);
   }, []);

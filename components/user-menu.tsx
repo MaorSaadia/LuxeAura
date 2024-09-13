@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { User } from "@prisma/client";
+import { SafeUser } from "@/app/types";
 import { User as UserIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
 
@@ -9,7 +9,7 @@ import MenuItem from "./menu-item";
 import useLoginModal from "@/hooks/use-login-modal";
 
 interface UserMenuProps {
-  currentUser?: User | null;
+  currentUser?: SafeUser | null;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { User } from "@prisma/client";
+import { SafeUser } from "@/app/types";
 
 import getCategories from "@/actions/get-categories";
 import Container from "@/components/ui/container";
@@ -9,7 +9,7 @@ import NavbarActions from "@/components/navbar-actions";
 export const revalidate = 0;
 
 interface NavbarProps {
-  currentUser?: User | null;
+  currentUser?: SafeUser | null;
 }
 
 const Navbar: React.FC<NavbarProps> = async ({ currentUser }) => {
