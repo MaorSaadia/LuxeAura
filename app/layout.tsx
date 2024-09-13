@@ -7,6 +7,8 @@ import ModalProvider from "@/providers/modal-provider";
 import ToastProvider from "@/providers/toast-provider";
 
 import "./globals.css";
+import LoginModal from "@/components/modals/LoginModal";
+import RegisterModal from "@/components/modals/RegisterModal";
 
 const font = Urbanist({ subsets: ["latin"] });
 
@@ -25,6 +27,8 @@ export default function RootLayout({
       <body className={font.className}>
         <ModalProvider />
         <ToastProvider />
+        <LoginModal />
+        <RegisterModal />
         <Navbar />
         {children}
         <Footer />

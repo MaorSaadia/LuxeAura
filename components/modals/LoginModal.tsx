@@ -4,7 +4,6 @@ import { useCallback, useState } from "react";
 
 import { FieldValues, useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { AiFillGithub } from "react-icons/ai";
 
 import useLoginModal from "@/hooks/use-login-modal";
 import useRegisterModal from "@/hooks/use-register-modal";
@@ -89,18 +88,12 @@ const LoginModal = () => {
         icon={FcGoogle}
         onClick={() => {}}
       />
-      <ModalButton
-        outline
-        label="Continue with Github"
-        icon={AiFillGithub}
-        onClick={() => {}}
-      />
       <div
         className="
       text-neutral-500 text-center mt-4 font-light"
       >
         <p>
-          First time using Airbnb?
+          First time here?
           <span
             onClick={onToggle}
             className="
