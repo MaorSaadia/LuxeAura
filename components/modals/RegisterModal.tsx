@@ -2,16 +2,18 @@
 
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
+import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
+import useRegisterModal from "@/hooks/use-register-modal";
+import useLoginModal from "@/hooks/use-login-modal";
+
 import Modal from "./Modal";
 import Input from "../inputs/Input";
 import Heading from "../ui/heading";
-import useRegisterModal from "@/hooks/use-register-modal";
-import useLoginModal from "@/hooks/use-login-modal";
 import ModalButton from "../ui/modal-button";
 
 const RegisterModal = () => {
@@ -92,13 +94,13 @@ const RegisterModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
       <ModalButton
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
       <div
         className="
