@@ -2,11 +2,11 @@
 
 import { useCallback, useState } from "react";
 import { SafeUser } from "@/app/types";
-import { User as UserIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 import MenuItem from "./menu-item";
 import useLoginModal from "@/hooks/use-login-modal";
+import Avatar from "./avatar";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -25,9 +25,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
       <div className="flex flex-row items-center">
         <div
           onClick={currentUser ? toggleOpen : loginModal.onOpen}
-          className="block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+          className="py-3 px-4 rounded-full hover:opacity-70 transition cursor-pointer"
         >
-          <UserIcon />
+          <div className="flex items-center justify-center w-8 h-8 overflow-hidden">
+            <Avatar src={currentUser?.image} />
+          </div>
         </div>
       </div>
       {isOpen && (

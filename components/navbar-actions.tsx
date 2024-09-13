@@ -28,7 +28,7 @@ const NavbarActions: React.FC<NavbarActionsProps> = ({ currentUser }) => {
   }
 
   return (
-    <div className="ml-auto flex items-center gap-x-4">
+    <div className="ml-auto flex items-center gap-x-0">
       <UserMenu currentUser={currentUser} />
       <Button
         onClick={() => router.push("/cart")}
